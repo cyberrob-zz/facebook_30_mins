@@ -67,7 +67,7 @@
 		"description": "目前使用量正常"
 	},
 	"friendly_reminder_overdose_usage": {
-		"message": "目前使用超量!請立即停止使用Facebook!",
+		"message": "目前使用超量!\n請立即停止使用Facebook!",
 		"description": "目前使用超量"
 	},
 	"no_usage_for_now": {

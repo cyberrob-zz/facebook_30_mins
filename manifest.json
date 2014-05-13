@@ -11,13 +11,12 @@
 	//"popup": "popup.html",
 	"options_page": "options.html",
 	"permissions": [
+		//"windows",
 		"background",
 		"tabs",
 		"storage",
 		"geolocation"
 	],
-
-
 
 	"browser_action": {
 		"default_title": "How many minutes have you use facebook",
@@ -30,5 +29,7 @@
 		//"scripts": ["background.js"]
 		"page": "background.html"
 
-	}
+	},
+
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

@@ -3,6 +3,8 @@ var errorCode;
 
 function renderPage()
 {
+	
+
 	$("#today_usage").html("<h3>"+
 		chrome.i18n.getMessage("today_usage_title")+"</h3>");
 
@@ -18,14 +20,13 @@ function renderPage()
 		var duration_str = 
 				duration.hours + " hours " + 
 				duration.minutes + " minutes " +
-				duration.seconds + " seconds " +
-				duration.millis + " millis";
-		
-		$("#fb_minutes").html("<h1>"+ duration_str +"</h1>");
-		
-		console.log("@ todayUsage: " + duration_str);
+				duration.seconds + " seconds "
 
-		if(duration.minutes > 30) {
+		console.log("@ todayUsage: " + formatTime(currentUsage));
+		
+		$("#fb_minutes").html("<h1>"+ formatTime(currentUsage) +"</h1>");
+		
+		if(duration.minutes > 1) {
 			$("#friendly_reminder").html("<h3>"+chrome.i18n.getMessage("friendly_reminder_overdose_usage")+"</h3>");
 			$("#friendly_reminder").css('color','overdose_minutes');
 		} else {
