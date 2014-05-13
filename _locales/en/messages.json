@@ -53,5 +53,25 @@
 	"click_here_to_close":{
 		"message": "Click here to close",
 		"description":"按此關閉"
+	},
+	"minites":{
+		"message": " mins",
+		"description": "分鐘"
+	},
+	"today_usage_title": {
+		"message": "Today you've been using Facebook for",
+		"description": "今日使用量標頭"
+	},
+	"friendly_reminder_fair_usage": {
+		"message": "It's fair usage for now",
+		"description": "目前使用量正常"
+	},
+	"friendly_reminder_overdose_usage": {
+		"message": "Stop using Facebook now! You're overdosed!",
+		"description": "目前使用超量"
+	},
+	"no_usage_for_now": {
+		"message": "No usage record for now",
+		"description": "目前沒有使用記錄"
 	}
 }

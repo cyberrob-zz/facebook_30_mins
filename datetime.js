@@ -1,33 +1,30 @@
-Date.prototype.pattern=function(fmt) {         
-    var o = {         
-    "M+" : this.getMonth()+1, //月份         
-    "d+" : this.getDate(), //日         
-    "h+" : this.getHours()%12 == 0 ? 12 : this.getHours()%12, //小時         
-    "H+" : this.getHours(), //小時         
-    "m+" : this.getMinutes(), //分         
-    "s+" : this.getSeconds(), //秒         
-    "q+" : Math.floor((this.getMonth()+3)/3), //季度         
-    "S" : this.getMilliseconds() //毫秒         
-    };         
-    var week = {         
-    "0" : "/u65e5",         
-    "1" : "/u4e00",         
-    "2" : "/u4e8c",         
-    "3" : "/u4e09",         
-    "4" : "/u56db",         
-    "5" : "/u4e94",         
-    "6" : "/u516d"        
-    };         
-    if(/(y+)/.test(fmt)){         
-        fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));         
-    }         
-    if(/(E+)/.test(fmt)){         
-        fmt=fmt.replace(RegExp.$1, ((RegExp.$1.length>1) ? (RegExp.$1.length>2 ? "/u661f/u671f" : "/u5468") : "")+week[this.getDay()+""]);         
-    }         
-    for(var k in o){         
-        if(new RegExp("("+ k +")").test(fmt)){         
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));         
-        }         
-    }         
-    return fmt;         
+function getDuration(timeMillis)
+{
+    var units = [
+        {label:"millis",    mod:1000,},
+        {label:"seconds",   mod:60,},
+        {label:"minutes",   mod:60,},
+        {label:"hours",     mod:24,},
+        {label:"days",      mod:7,},
+        {label:"weeks",     mod:52,},
+    ];
+    var duration = new Object();
+    var x = timeMillis;
+    for (i = 0; i < units.length; i++){
+        var tmp = x % units[i].mod;
+        duration[units[i].label] = tmp;
+        x = (x - tmp) / units[i].mod
+    }
+    return duration;
+}
+
+function dhms(t)
+{
+    var cd = 24 * 60 * 60 * 1000,
+        ch = 60 * 60 * 1000,
+        d = Math.floor(t / cd),
+        h = '0' + Math.floor( (t - d * cd) / ch),
+        m = '0' + Math.round( (t - d * cd - h * ch) / 60000);
+        s = '0' + Math.round( (t - d * cd - h * ch) / 360000);
+    return [d, h.substr(-2), m.substr(-2), s.substr(-2)].join(':');
 }

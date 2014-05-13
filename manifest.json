@@ -8,7 +8,7 @@
 	//
 
 	//"background_page": "background.html",
-	"popup": "popup.html",
+	//"popup": "popup.html",
 	"options_page": "options.html",
 	"permissions": [
 		"background",
@@ -27,8 +27,8 @@
 	"author": "cyberrob",
 	"background": {
 		"persistent": false,
-		"scripts": ["background.js"]
-		//"page": "background.html"
+		//"scripts": ["background.js"]
+		"page": "background.html"
 
 	}
 }

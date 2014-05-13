@@ -1,12 +1,12 @@
 {
 	"extName":
 	{
-		"message": "現在天氣怎麼樣",
+		"message": "限用FB 30分鐘",
 		"description":"擴充套件名稱"
 	},
 	"extDescription":
 	{
-		"message": "顯示所在地現在的天氣狀態",
+		"message": "限制使用Facebook一天在固定使用時間內",
 		"description":"擴充套件描述"
 	},
 	"locale":
@@ -53,5 +53,26 @@
 	"click_here_to_close":{
 		"message": "按此關閉",
 		"description":"按此關閉"
+	},
+	"minites":{
+		"message": "分鐘",
+		"description": "分鐘"
+	},
+	"today_usage_title": {
+		"message": "你今天使用Facebook達",
+		"description": "今日使用量標頭"
+	},
+	"friendly_reminder_fair_usage": {
+		"message": "目前使用量正常",
+		"description": "目前使用量正常"
+	},
+	"friendly_reminder_overdose_usage": {
+		"message": "目前使用超量!請立即停止使用Facebook!",
+		"description": "目前使用超量"
+	},
+	"no_usage_for_now": {
+		"message": "目前沒有使用記錄",
+		"description": "目前沒有使用記錄"
 	}
+
 }
