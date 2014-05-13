@@ -1,9 +1,17 @@
-var fb_visible_duration = 0;
 var fb_tab_count;
 var start_time;
 var end_time; 
+var fb_visiable_duration = 0;
 
-var date_time_format = "YYYY-MM-dd HH:mm:ss";
+// a usage paremeter for popup.html to retrieve
+var currentUsage = 0;
+var errorCode;
+
+
+// Local storage key
+var KEY_RECORD_STR = 'key_record_str';
+var KEY_DAILY_SUM = 'key_daily_sum';
+var KEY_TODAY_USAGE = 'key_today_usage';
 
 function validate_url(url)
 {
@@ -15,16 +23,15 @@ function validate_url(url)
 
 function countDuration(tab_url)
 {
-	//console.log("@ we got " + tab_url);
-
+	
 	if(validate_url(tab_url)) {
 		start_time = new Date();
 
 		var start_time_str = 
 			start_time.getFullYear() +"/"+ 
 			(start_time.getMonth()+1) +"/"+ 
-			start_time.getDate() + " "
-			+ start_time.getHours() + ":" + 
+			start_time.getDate() + " " + 
+			start_time.getHours() + ":" + 
 			start_time.getMinutes() + ":" + 
 			start_time.getSeconds();
 
@@ -37,8 +44,8 @@ function countDuration(tab_url)
 		var end_time_str = 
 			end_time.getFullYear() +"/"+ 
 			(end_time.getMonth()+1) +"/"+ 
-			end_time.getDate() + " "
-			+ end_time.getHours() + ":" + 
+			end_time.getDate() + " "+ 
+			end_time.getHours() + ":" + 
 			end_time.getMinutes() + ":" + 
 			end_time.getSeconds();
 
@@ -46,25 +53,34 @@ function countDuration(tab_url)
 
 		if(start_time != undefined) {
 			
-			fb_visible_duration += (end_time - start_time);
+			fb_visiable_duration = (end_time - start_time);
 			console.log("@ plus " + (end_time - start_time) + " ms");
+
+			if(currentUsage === undefined)
+				currentUsage = fb_visiable_duration;
+			else
+				currentUsage = currentUsage + fb_visiable_duration;
 			
-			var duration = getDuration(fb_visible_duration);
+			//saveTodayUsage(currentUsage);
+			
+			//
+			var duration = getDuration(currentUsage);
 			var duration_str = 
 				duration.hours + " hours " + 
 				duration.minutes + " minutes " +
 				duration.seconds + " seconds " +
 				duration.millis + " millis";
-
-			console.log("@ facebook usage is " + duration_str);
-			saveToLoalStorage(duration_str);
+			console.log("@ total facebook usage: " + duration_str);
+			//saveRecordStr(duration_str);
+			
+			// reset start_time
 			start_time = undefined;	
 		}
-		
 	}		
 }
 
-function saveToLoalStorage(record)
+
+function saveRecordStr(record)
 {
 	if(!record) {
 		console.log("@ Error: No value specified.");
@@ -82,9 +98,9 @@ function saveToLoalStorage(record)
 
 	record = current_time_str + "::" + record;
 
-	console.log(record);
+	//console.log(record);
 
-	chrome.storage.local.get('record', function (result) {
+	chrome.storage.local.get('key_record_str', function (result) {
         
         savedRecord = result.record;
     	
@@ -92,48 +108,20 @@ function saveToLoalStorage(record)
 
     		console.log(savedRecord);
 
-    		chrome.storage.local.set({'record': savedRecord + "\n"+ record}, function() {
+    		chrome.storage.local.set({'key_record_str': savedRecord + "\n"+ record}, function() {
 				console.log("Record saved @ " + current_time_str);
 			});
     	} else {
-    		chrome.storage.local.set({'record': record}, function() {
+
+    		chrome.storage.local.set({'key_record_str': record}, function() {
 				console.log("Record saved @ " + record);
 			});
     	}    
     });
-
-	
 }
 
-function getDuration(timeMillis)
-{
-    var units = [
-        {label:"millis",    mod:1000,},
-        {label:"seconds",   mod:60,},
-        {label:"minutes",   mod:60,},
-        {label:"hours",     mod:24,},
-        {label:"days",      mod:7,},
-        {label:"weeks",     mod:52,},
-    ];
-    var duration = new Object();
-    var x = timeMillis;
-    for (i = 0; i < units.length; i++){
-        var tmp = x % units[i].mod;
-        duration[units[i].label] = tmp;
-        x = (x - tmp) / units[i].mod
-    }
-    return duration;
-}
 
-function dhms(t){
-    var cd = 24 * 60 * 60 * 1000,
-        ch = 60 * 60 * 1000,
-        d = Math.floor(t / cd),
-        h = '0' + Math.floor( (t - d * cd) / ch),
-        m = '0' + Math.round( (t - d * cd - h * ch) / 60000);
-        s = '0' + Math.round( (t - d * cd - h * ch) / 360000);
-    return [d, h.substr(-2), m.substr(-2), s.substr(-2)].join(':');
-}
+
 
 function getCurrentLocation()
 {
@@ -156,10 +144,10 @@ function error(msg)
     //errorCode="unable_to_locate_your_position";
 }
 
-
-
 chrome.tabs.onActivated.addListener(function(info){
-	//var tab = 
+	
+	//currentUsage = restoreTodayUsage();
+
 	chrome.tabs.get(info.tabId, function(tab){
 		countDuration(tab.url);	
 	});

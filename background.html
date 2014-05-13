@@ -2,50 +2,8 @@
 <head>
 	<meta charset="utf-8"/>
 	<script type="text/javascript" src="jquery.min.js"></script>
-	<script type="text/javascript">
-
-	var fb_visible_duration = 0;
-	var fb_tab_count;
-	var start_time;
-	var end_time; 
-
-	function validate_url(url)
-    {
-        if (/^(https?:\/\/)?((w{3}\.)?)facebook.com\/.*/i.test(url))
-        	return true;
-     	else
-        	return false;
-    }
-
-	function countDuration()
-	{
-		chrome.tabs.getCurrent(function(tab){
-			if(validate_url(tab.url)) {
-				if(typeof(start_time)=="undefined") {
-					start_time = new Date().getTime();	
-				}
-				
-				console.log("@ start using facebook @ " + start_time);
-				console.log(tab.url);	
-			} else {
-				end_time = new Date().getTime();
-				console.log("@ user switched to other site now...");
-				console.log("@ facebook duration is " + (end_time - start_time));
-			}
-			
-		});
-	}
-
-	function getCurrentLocation()
-	{
-	    console.log("getCurrentLocation()");
-	    navigator.geolocation.getCurrentPosition(success, error);
-	}
-
-	countDuration();
-	getCurrentLocation();
-
-
-	</script>
+	<script type="text/javascript" src="sidekick.js"></script>
+	<script type="text/javascript" src="datetime.js"></script>
+	<script type="text/javascript" src="background.js"></script>
 </head>
 </html>
