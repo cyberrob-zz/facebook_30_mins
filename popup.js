@@ -26,7 +26,9 @@ function renderPage()
 		
 		$("#fb_minutes").html("<h1>"+ formatTime(currentUsage) +"</h1>");
 		
-		if(duration.minutes > 1) {
+		var usage_limit = localStorage["time_limit"];
+
+		if(duration.minutes > usage_limit) {
 			$("#friendly_reminder").html("<h3>"+chrome.i18n.getMessage("friendly_reminder_overdose_usage")+"</h3>");
 			$("#friendly_reminder").css('color','overdose_minutes');
 		} else {

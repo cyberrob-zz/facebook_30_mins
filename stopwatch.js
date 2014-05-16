@@ -27,13 +27,17 @@ var	clsStopwatch = function() {
 		// Public methods
 		// Start or resume
 		this.start = function() {
+				console.log("@ [START] get daily usage from storage: " + localStorage['daily_usage']);
 				startAt	= startAt ? startAt : now();
+				console.log("@ startAt: " + startAt);
 			};
  
 		// Stop or pause
 		this.stop = function() {
 				// If running, update elapsed time otherwise keep it
 				lapTime	= startAt ? lapTime + now() - startAt : lapTime;
+				localStorage['daily_usage'] = lapTime;
+				console.log("@ [STOP] daily usage saved to storage: " + localStorage['daily_usage']);
 				startAt	= 0; // Paused
 			};
  

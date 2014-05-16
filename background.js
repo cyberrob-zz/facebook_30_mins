@@ -98,20 +98,11 @@ function countDuration(tab_url)
 	}		
 }
 
-
-
- 
-
- 
-function show() {
-	//$time = document.getElementById('time');
-	update();
-}
  
 function update() {
 	//$time.innerHTML = formatTime(stopwatch.time());
 	//console.log(formatTime(stopwatch.time()));
-	currentUsage = stopwatch.time();
+	localStorage['daily_usage'] = currentUsage = stopwatch.time();
 }
  
 function start() {
@@ -205,22 +196,20 @@ chrome.tabs.onActivated.addListener(function(info){
 
 chrome.windows.onFocusChanged.addListener(function() {
 	console.log("Focus changed.");
+	chrome.windows.getCurrent(function(window){
+		console.log(window.state);
+		if(window.state == "normal") {
+			console.log("It's normal.Stop the watch.");
+			//stop();
+		} else if(window.state == "maximized"){
+			console.log("It's maximized.Start the watch.");
+			//countDuration();
+		}
+	});
 });
 
-// chrome.app.window.current().onMinimized.addListener(function () {
-// 	console.log("@ chrome window got minimized.");
-// });
 
-// chrome.app.window.current().onMaximized.addListener(function () {
-// 	console.log("@ chrome window got maximized.");
-// });
-
-// chrome.app.window.current().onRestored.addListener(function () {
-// 	console.log("@ chrome window got restored.");
-// });
-
-// chrome.app.window.current().onClosed.addListener(function () {
-// 	console.log("@ chrome window got closed.");
-// });
-
+update();
 getCurrentLocation();
+
+

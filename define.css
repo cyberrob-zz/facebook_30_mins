@@ -10,3 +10,56 @@
 #fair_minutes {
 	color: #03b000;
 }
+
+.button {
+	border: 1px solid #007aff;
+	border-radius: 5px;
+	background: #fff;
+	padding: 10px 12px 8px 12px;
+	font: 16px "Helvetica Neue";
+	color: #135ae4;
+	font-weight: 200;
+}
+
+.button:hover {
+	background: #007aff;
+	color: #fff;
+	text-decoration: none;
+}
+
+input {
+	border: none;
+	font: 18px "Helvetica Neue";
+	color: #000;
+	height: 30px;
+	width: 60px;
+	padding: 5px;
+	background: transparent;
+}
+
+#option_section {
+	text-align: center;
+	padding-top: 20px;
+}
+
+@font-face {
+  font-family: 'ios7-icon';
+  src:
+    url('http://ios7-icon-font-demo.herokuapp.com/fonts/ios7-icon.woff') format('woff'),
+    url('http://ios7-icon-font-demo.herokuapp.com/fonts/ios7-icon.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon {
+  display: inline-block;
+  font-size: inherit;
+  font-family: 'ios7-icon';
+  margin-right: 5px;
+  color: inherit;
+  -webkit-text-rendering: geometricPrecision;
+  -moz-text-rendering: geometricPrecision;
+  -ms-text-rendering: geometricPrecision;
+  -o-text-rendering: geometricPrecision;
+  text-rendering: geometricPrecision;
+}
