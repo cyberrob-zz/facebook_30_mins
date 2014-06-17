@@ -27,13 +27,14 @@
 	text-decoration: none;
 }
 
-input {
+input[type="number"] {
 	border: none;
-	font: 18px "Helvetica Neue";
+	font-size: 18px;
+	font-family: "Helvetica Neue";
 	color: #000;
 	height: 30px;
 	width: 60px;
-	padding: 5px;
+	padding-left: 5px;
 	background: transparent;
 }
 

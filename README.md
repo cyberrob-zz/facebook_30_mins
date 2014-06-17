@@ -21,3 +21,4 @@ It's my first Chrome extension. Kinda of try-out.
 2. It may apply to any other sites as well. But now it's just for Facebook.
 3. Options for configuring usage limit
 
+> How it

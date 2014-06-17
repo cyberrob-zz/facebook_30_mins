@@ -4,14 +4,14 @@ function saveTodayUsage(today_usage)
 {
     if(today_usage == undefined || isNaN(today_usage)) return;
 
-    chrome.storage.local.set({'key_today_usage': today_usage}, function() {
+    chrome.storage.sync.set({'key_today_usage': today_usage}, function() {
         console.log("Today usage saved @ " + today_usage);
     });
 }
 
 function restoreTodayUsage()
 {
-    chrome.storage.local.get('key_today_usage', function(today_usage) {
+    chrome.storage.sync.get('key_today_usage', function(today_usage) {
         
         console.log(today_usage.record);
 

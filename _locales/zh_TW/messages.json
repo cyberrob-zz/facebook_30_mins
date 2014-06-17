@@ -1,12 +1,12 @@
 {
 	"extName":
 	{
-		"message": "限用FB 30分鐘",
+		"message": "FB 每日使用量",
 		"description":"擴充套件名稱"
 	},
 	"extDescription":
 	{
-		"message": "限制使用Facebook一天在固定使用時間內",
+		"message": "顯示今天Facebook的使用量",
 		"description":"擴充套件描述"
 	},
 	"locale":
