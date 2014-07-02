@@ -16,7 +16,6 @@
 		"tabs",
 		"https://www.google-analytics.com/",
 		"storage",
-		//"geolocation",
 		"unlimitedStorage",
 		"alarms"
 	],
@@ -29,6 +28,5 @@
 	"background": {
 		"persistent": true,
 		"page": "background.html"
-	},
-	"content_security_policy": "script-src 'self' 'unsafe-eval';'unsafe-inline'; object-src 'self'"
+	}
 }

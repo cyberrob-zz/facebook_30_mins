@@ -9,16 +9,11 @@ It's my first Chrome extension. Kinda of try-out.
 
 ###Todo:
 1. ~~Prepare a popup for showing how much time spent in Facebook~~
-2. Options for configuring ~~usage limit~~, site to monitor
+2. Options for configuring ~~usage limit~~, other site to monitor
 3. ~~Save daily usage into local storage~~
-4. Accumulating history usage
-	- A Web SQL schema for storing history data
-	- A graph for displaying history usage
-5. Upload to Chrome Web Store[Drafted]
+4. ~~Upload to Chrome Web Store[Drafted]~~
 
-###Update:
-1. It's just under development. You can see duration now in the console.
+###Update July 2, 2014:
+1. It's a early stable version now.
 2. It may apply to any other sites as well. But now it's just for Facebook.
 3. Options for configuring usage limit
-
-> How it

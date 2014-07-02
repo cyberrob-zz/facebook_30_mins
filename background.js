@@ -78,7 +78,7 @@ function start() {
         console.log("@ we found usage in the storage: " + currentUsage);
         stopwatch.setLapTime(currentUsage);
     } else {
-        console.log("@ not usage found we start fresh from 0!");
+        console.log("@ NO usage found we start fresh from 0!");
     }
 
     stopwatch.start();
