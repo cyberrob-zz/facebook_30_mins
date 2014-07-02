@@ -1,12 +1,12 @@
 {
 	"extName":
 	{
-		"message": "Facebook 30 mins a day",
+		"message": "Facebook Usage Timer",
 		"description":"擴充套件名稱"
 	},
 	"extDescription":
 	{
-		"message": "Restrict facebook usage to 30 mins a day",
+		"message": "Show facebook usage for the day",
 		"description":"擴充套件描述"
 	},
 	"locale":
@@ -19,9 +19,13 @@
 		"message": "Loading...",
 		"description":"載入資料時的popup內容"
 	},
+	"welcome_first_start":{
+		"message": "Welcome!",
+		"description":"First time start"
+	},
 	"unable_to_load_data":
 	{
-		"message": "Unable to load data.",
+		"message": "Open your Facebook tab to start tracking usage.",
 		"description":"資料載入錯誤時的popup內容"
 	},
 	"unable_to_locate_your_position":
@@ -58,8 +62,16 @@
 		"message": " mins",
 		"description": "分鐘"
 	},
+	"today_is": {
+		"message": "It's ",
+		"description": "今天標題"
+	},
+	"dot": {
+		"message": ".",
+		"description": "句點"
+	},
 	"today_usage_title": {
-		"message": "Today you've been using Facebook for",
+		"message": "You've been using Facebook for",
 		"description": "今日使用量標頭"
 	},
 	"friendly_reminder_fair_usage": {

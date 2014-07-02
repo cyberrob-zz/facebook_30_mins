@@ -1,12 +1,12 @@
 {
 	"extName":
 	{
-		"message": "FB 每日使用量",
+		"message": "Facebook每日用量錶",
 		"description":"擴充套件名稱"
 	},
 	"extDescription":
 	{
-		"message": "顯示今天Facebook的使用量",
+		"message": "顯示每日Facebook的使用量",
 		"description":"擴充套件描述"
 	},
 	"locale":
@@ -19,9 +19,13 @@
 		"message": "資料載入中...",
 		"description":"載入資料時的popup內容"
 	},
+	"welcome_first_start":{
+		"message": "歡迎使用!",
+		"description":"First time start"
+	},
 	"unable_to_load_data":
 	{
-		"message": "無法載入資料。",
+		"message": "請開啓Facebook Tab開始記錄。",
 		"description":"資料載入錯誤時的popup內容"
 	},
 	"unable_to_locate_your_position":
@@ -58,8 +62,16 @@
 		"message": "分鐘",
 		"description": "分鐘"
 	},
+	"today_is": {
+		"message": "今天是 ",
+		"description": "今天標題"
+	},
+	"dot": {
+		"message": "。",
+		"description": "句點"
+	},
 	"today_usage_title": {
-		"message": "你今天使用Facebook達",
+		"message": "已使用Facebook",
 		"description": "今日使用量標頭"
 	},
 	"friendly_reminder_fair_usage": {
