@@ -15,72 +15,71 @@
 //	To reset a paused stopwatch
 //		obj.stop();
 //
-var	clsStopwatch = function() {
-		// Private vars
-		var	startAt	= 0;	// Time of last start / resume. (0 if not running)
-		var	lapTime	= 0;	// Time on the clock when last stopped in milliseconds
- 
+var clsStopwatch = function() {
+    // Private vars
+    var startAt = 0; // Time of last start / resume. (0 if not running)
+    var lapTime = 0; // Time on the clock when last stopped in milliseconds
 
+    var now = function() {
+        return (new Date()).getTime();
+    };
 
-		var	now	= function() {
-				return (new Date()).getTime(); 
-			}; 
- 
-		// Public methods
-		// Start or resume
-		this.start = function() {
-				//console.log("@ [START] get daily usage from storage: " + localStorage['daily_usage']);
-				startAt	= startAt ? startAt : now();
-				//console.log("@ startAt: " + startAt);
-			};
- 
-		// Stop or pause
-		this.stop = function() {
-				// If running, update elapsed time otherwise keep it
-				lapTime	= startAt ? lapTime + now() - startAt : lapTime;
-				// localStorage['daily_usage'] = lapTime;
-				// console.log("@ [STOP] daily usage saved to storage: " + localStorage['daily_usage']);
-				startAt	= 0; // Paused
-			};
- 
-		// Reset
-		this.reset = function() {
-				lapTime = startAt = 0;
-			};
- 
-		// Duration
-		this.time = function() {
-				var time = lapTime + (startAt ? now() - startAt : 0);
-				return time; 
-		};
+    // Public methods
+    // Start or resume
+    this.start = function() {
+        startAt = startAt ? startAt : now();
+        console.log("@ startAt: " + startAt);
+    };
 
-		this.setLapTime = function(newLapTime) {
-			lapTime = newLapTime;
-			console.log("@ we start from " + lapTime);
-		};
+    // Stop or pause
+    this.stop = function() {
+        // If running, update elapsed time otherwise keep it
+        lapTime = startAt ? lapTime + now() - startAt : lapTime;
+        startAt = 0; // Paused
+    };
 
-		this.setStartAt = function(newStartAt) {
-			startAt = newStartAt;
-		};
-	};
- 
+    // Reset
+    this.reset = function() {
+        lapTime = startAt = 0;
+    };
+
+    // Duration
+    this.time = function() {
+        var duration = lapTime + (startAt ? now() - startAt : 0);
+        return duration;
+    };
+
+    this.lapTime = function() {
+        return lapTime;
+    };
+
+    this.setLapTime = function(newLapTime) {
+        lapTime = newLapTime;
+        console.log("@ we start from " + lapTime);
+    };
+
+    this.setStartAt = function(newStartAt) {
+        startAt = newStartAt;
+    };
+};
+
 
 function pad(num, size) {
-	var s = "0000" + num;
-	return s.substr(s.length - size);
+    var s = "0000" + num;
+    return s.substr(s.length - size);
 }
- 
+
 function formatTime(time) {
-	var h = m = s = ms = 0;
-	var newTime = '';
- 
-	h = Math.floor( time / (60 * 60 * 1000) );
-	time = time % (60 * 60 * 1000);
-	m = Math.floor( time / (60 * 1000) );
-	time = time % (60 * 1000);
-	s = Math.floor( time / 1000 );
-	//ms = time % 1000;
- 
-	newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2);// + ':' + pad(ms, 3);
-	return newTime;
-} 
+    var h = m = s = ms = 0;
+    var newTime = '';
+
+    h = Math.floor(time / (60 * 60 * 1000));
+    time = time % (60 * 60 * 1000);
+    m = Math.floor(time / (60 * 1000));
+    time = time % (60 * 1000);
+    s = Math.floor(time / 1000);
+    //ms = time % 1000;
+
+    newTime = pad(h, 2) + ':' + pad(m, 2) + ':' + pad(s, 2); // + ':' + pad(ms, 3);
+    return newTime;
+}

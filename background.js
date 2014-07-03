@@ -62,10 +62,9 @@ function getNowStr() {
 }
 
 function update() {
-    //$time.innerHTML = formatTime(stopwatch.time());
-    //console.log(formatTime(stopwatch.time()));
+
     currentUsage = stopwatch.time();
-    //console.log("@ update per sec: " + currentUsage);
+    console.log("==> " + formatTime(currentUsage));
 }
 
 function start() {
@@ -75,8 +74,8 @@ function start() {
     getUsage();
     // if we found usage in the storage, then set it to the stopwatch
     if (currentUsage != 0) {
-        console.log("@ we found usage in the storage: " + currentUsage);
-        stopwatch.setLapTime(currentUsage);
+        console.log("@ Found usage in the storage: " + currentUsage);
+        //stopwatch.setStartAt(stopwatch.now());
     } else {
         console.log("@ NO usage found we start fresh from 0!");
     }
@@ -87,7 +86,8 @@ function start() {
 }
 
 function stop() {
-    console.log("STOP using Facebook : " + formatTime(stopwatch.time()));
+    console.log("stopwatch laptime: " + stopwatch.lapTime() + " /// stopwatch time: " + stopwatch.time() + " /// currentUsage: " + currentUsage);
+    console.log("STOP using Facebook : " + formatTime(currentUsage));
     stopwatch.stop();
     clearInterval(clocktimer);
     saveUsage();
@@ -118,7 +118,6 @@ function getUsage() {
     var key = getTodayStr();
 
     chrome.storage.local.get(null, function(items) {
-        //console.log("we've got " + items);
 
         // Reverse the string back to obj
         var log = JSON.parse(items[key]);
@@ -128,8 +127,8 @@ function getUsage() {
         //     "\n\t updated: " + log.updated);
 
         if (log) {
-            console.log("Restoring today usage from storage...");
             currentUsage = log.duration;
+            console.log("Restoring today usage from storage " + currentUsage);
         }
     });
 }
@@ -157,46 +156,49 @@ function error(msg) {
 chrome.tabs.onActivated.addListener(function(info) {
 
     chrome.tabs.get(info.tabId, function(tab) {
-        //if(validate_fb_url(tab.url)) {
+
         countDuration(tab.url);
-        //}
+
     });
 });
 
 // Add this listener when the url of the tab is updated
 // chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
-// 		console.log("@ tab status: " + changeInfo.status
-// 				+ " ,tab url: " + tab.url);
-// 		countDuration(tab.url);	
+//      console.log("@ tab status: " + changeInfo.status
+//              + " ,tab url: " + tab.url);
+//      countDuration(tab.url); 
 // });
 
-chrome.windows.onFocusChanged.addListener(function() {
+chrome.windows.onFocusChanged.addListener(function(windowId) {
 
-    var getInfo = {
-        populate: true
-    };
+    console.log("window id===>" + windowId);
+    if (windowId == chrome.windows.WINDOW_ID_NONE) {
+        stop();
+    } else {
 
-    chrome.windows.getCurrent(getInfo, function(window) {
+        var getInfo = {
+            populate: true
+        };
 
-        chrome.tabs.query({
-            currentWindow: true,
-            active: true
-        }, function(tabs) {
-            console.log("@ current tab url: " + tabs[0].url);
-            countDuration(tabs[0].url);
+        chrome.windows.getCurrent(getInfo, function(window) {
+
+            console.log("@ window state: " + window.state);
+
+            if (window.state == "normal" || window.state == "maximized") {
+                chrome.tabs.query({
+                    currentWindow: true,
+                    active: true
+                }, function(tabs) {
+
+                    console.log("@ current tab url: " + tabs[0].url);
+                    countDuration(tabs[0].url);
+                });
+
+                today_str = getTodayStr();
+            }
         });
-
-        //start();
-        today_str = getTodayStr();
-
-        if (window.state != "normal" || window.state != "maximized") {
-            stop();
-        } else {
-
-
-        }
-    });
+    }
 });
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
