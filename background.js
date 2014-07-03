@@ -64,7 +64,7 @@ function getNowStr() {
 function update() {
 
     currentUsage = stopwatch.time();
-    console.log("==> " + formatTime(currentUsage));
+    //console.log("==> " + formatTime(currentUsage));
 }
 
 function start() {
@@ -86,7 +86,7 @@ function start() {
 }
 
 function stop() {
-    console.log("stopwatch laptime: " + stopwatch.lapTime() + " /// stopwatch time: " + stopwatch.time() + " /// currentUsage: " + currentUsage);
+    //console.log("stopwatch laptime: " + stopwatch.lapTime() + " /// stopwatch time: " + stopwatch.time() + " /// currentUsage: " + currentUsage);
     console.log("STOP using Facebook : " + formatTime(currentUsage));
     stopwatch.stop();
     clearInterval(clocktimer);
@@ -172,7 +172,7 @@ chrome.tabs.onActivated.addListener(function(info) {
 
 chrome.windows.onFocusChanged.addListener(function(windowId) {
 
-    console.log("window id===>" + windowId);
+    // console.log("window id===>" + windowId);
     if (windowId == chrome.windows.WINDOW_ID_NONE) {
         stop();
     } else {
@@ -183,7 +183,7 @@ chrome.windows.onFocusChanged.addListener(function(windowId) {
 
         chrome.windows.getCurrent(getInfo, function(window) {
 
-            console.log("@ window state: " + window.state);
+            //console.log("@ window state: " + window.state);
 
             if (window.state == "normal" || window.state == "maximized") {
                 chrome.tabs.query({
