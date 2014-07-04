@@ -13,7 +13,12 @@ It's my first Chrome extension. Kinda of try-out.
 3. ~~Save daily usage into local storage~~
 4. ~~Upload to Chrome Web Store[Drafted]~~
 
-###Update July 2, 2014:
+###Update July 4, 2014:
 1. It's a early stable version now.
 2. It may apply to any other sites as well. But now it's just for Facebook.
 3. Options for configuring usage limit
+4. Fix the issue of timer still counting while Chrome is in the background.
+
+
+###Installation:
+You can install this Chrome extension [here from Chrome webstore](https://chrome.google.com/webstore/detail/facebook-usage-meter/ejfikepnokkjcjhjkpppdbpiccgjmjkc?utm_source=chrome-ntp-icon) or just clone this repo to install it to Chrome in the developer mode.
